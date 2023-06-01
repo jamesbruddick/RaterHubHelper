@@ -1,26 +1,20 @@
 // ==UserScript==
 // @name         RaterHubHelper
-// @version      2.1.0
+// @version      2.1.1
 // @description  RaterHubHelper
 // @author       JamesTGH
 // @match        https://www.raterhub.com/*
 // @updateURL    https://tm.jamestgh.com/RaterHubHelper.meta.js
 // @downloadURL  https://tm.jamestgh.com/RaterHubHelper.user.js
-// @require      https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js#sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==
+// @require      https://code.jquery.com/jquery-3.7.0.min.js#sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=
 // ==/UserScript==
 
 $(document).ready(function() {
-    // $('.ewok-buds-body #ewok-submit-div').css('margin-bottom', '12px !important');
-    // change the background colors and text colors for dark mode
-    //$('body, .container').css('background-color', '#888888');
-    //$('table.report th, table.details th, table.frame th, .ewok-buds-card h2').css({'background-color': '#666666', 'color': '#000000'});
-    //$('.ewok-editor-editable-columngroup.with-first-row-headers>tbody>tr:first-child, .ewok-buds-summary-section th, input[type="text"], textarea').css('background-color', '#777777');
-    //$('.ewok-buds-card, .ewok-buds-body #ewok-task-form>*:not(.ewok-buds):not(.clear):not(#hidden-fields):not(.not-ewok-buds-card)').css('background-color', '#666666');
     // check if your on a task webpage or homepage to append the start or end time on the title
     if (sessionStorage.getItem('starttaskTime') !== null && window.location.href.indexOf('?taskIds=') === -1) {
         $('title').append(' | ' + new Date(Number(sessionStorage.getItem('starttaskTime'))).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
     };
-    $('span.ewok-estimated-task-weight').ready(function() {
+    if ($('span.ewok-estimated-task-weight').length) {
         // set the start time for working on tasks
         let starttaskTime = new Date(Math.round(new Date().getTime() / 6e4) * 6e4).getTime();
         // if start time doesn't exist reset sessionStorage starttaskTime and endtaskTime
@@ -42,7 +36,8 @@ $(document).ready(function() {
         // display the starttaskTime and the total amount of time doing tasks at the bottom next to the buttons
         $("div.button-group").append($('<div>')
             .append($('<b>').text('Started Working Time: ' + (new Date(Number(sessionStorage.getItem('starttaskTime'))).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })).toString() + ' | '))
-            .append($('<b>').text('Total Worked Time: ' + Math.floor(workedMinutes / 60) + ':' + (workedMinutes % 60).toString().padStart(2, '0') + ' (' + (workedMinutes / 60).toFixed(2) + ')'))
+            .append($('<b>').text('Total Worked Time: ' + Math.floor(workedMinutes / 60) + ':' + (workedMinutes % 60).toString().padStart(2, '0') + ' (' + (workedMinutes / 60).toFixed(2) + ') | '))
+            .append($('<b>').text('Task ID: ' + window.location.href.split('=')[1]))
         );
         // change the background color if you are within 10 seconds of the endtaskTime
         setInterval(function() {
@@ -50,5 +45,5 @@ $(document).ready(function() {
                 $('body, .container').css('background-color', '#A91B0D');
             };
         }, 1e3);
-    });
+    };
 });
