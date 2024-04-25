@@ -34,7 +34,7 @@ RaterHubHelper may receive updates to improve its functionality or compatibility
 
 ## Contributions
 
-RaterHubHelper is developed by JamesTGH. Contributions to the project are welcome. If you encounter any issues or have suggestions for improvements, please create an issue on the [GitHub repository](https://github.com/jamestgh/RaterHubHelper).
+RaterHubHelper is developed by James Ruddick. Contributions to the project are welcome. If you encounter any issues or have suggestions for improvements, please create an issue on the [GitHub repository](https://github.com/jamesbruddick/RaterHubHelper).
 
 ## License
 

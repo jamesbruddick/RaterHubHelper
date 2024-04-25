@@ -2,7 +2,7 @@
 // @name         RaterHubHelper
 // @version      2.1.2
 // @description  RaterHubHelper
-// @author       JamesTGH
+// @author       James Ruddick
 // @match        https://www.raterhub.com/*
 // @updateURL    https://tm.jamestgh.com/raterhubhelper.meta.js
 // @downloadURL  https://tm.jamestgh.com/raterhubhelper.user.js
